@@ -8,22 +8,40 @@
 
 /* Begin PBXBuildFile section */
 		5D9356BC1E6C499D00D0CD9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9356BB1E6C499D00D0CD9B /* AppDelegate.swift */; };
-		5D9356BE1E6C499D00D0CD9B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9356BD1E6C499D00D0CD9B /* ViewController.swift */; };
 		5D9356C11E6C499D00D0CD9B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D9356BF1E6C499D00D0CD9B /* Main.storyboard */; };
 		5D9356C41E6C499D00D0CD9B /* RSS_Reader.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5D9356C21E6C499D00D0CD9B /* RSS_Reader.xcdatamodeld */; };
 		5D9356C61E6C499D00D0CD9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D9356C51E6C499D00D0CD9B /* Assets.xcassets */; };
 		5D9356C91E6C499D00D0CD9B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D9356C71E6C499D00D0CD9B /* LaunchScreen.storyboard */; };
+		5D9356D61E6C4AD400D0CD9B /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9356D51E6C4AD400D0CD9B /* BaseViewController.swift */; };
+		5D9356D91E6C4B0600D0CD9B /* RSSListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9356D81E6C4B0600D0CD9B /* RSSListViewController.swift */; };
+		5D9356DB1E6C4B6D00D0CD9B /* RSSNewsFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9356DA1E6C4B6D00D0CD9B /* RSSNewsFeedViewController.swift */; };
+		5D9356DD1E6C4B8000D0CD9B /* RSSNewsDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9356DC1E6C4B8000D0CD9B /* RSSNewsDetailsViewController.swift */; };
+		5D9357021E6C530100D0CD9B /* RSSSource+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9356FE1E6C530100D0CD9B /* RSSSource+CoreDataClass.swift */; };
+		5D9357031E6C530100D0CD9B /* RSSSource+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9356FF1E6C530100D0CD9B /* RSSSource+CoreDataProperties.swift */; };
+		5D9357041E6C530100D0CD9B /* RSSNews+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9357001E6C530100D0CD9B /* RSSNews+CoreDataClass.swift */; };
+		5D9357051E6C530100D0CD9B /* RSSNews+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9357011E6C530100D0CD9B /* RSSNews+CoreDataProperties.swift */; };
+		5D9357071E6C536F00D0CD9B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9357061E6C536F00D0CD9B /* NetworkService.swift */; };
+		5D9357091E6C538800D0CD9B /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9357081E6C538800D0CD9B /* CoreDataStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5D9356B81E6C499D00D0CD9B /* RSS Reader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RSS Reader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D9356BB1E6C499D00D0CD9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5D9356BD1E6C499D00D0CD9B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5D9356C01E6C499D00D0CD9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5D9356C31E6C499D00D0CD9B /* RSS_Reader.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RSS_Reader.xcdatamodel; sourceTree = "<group>"; };
 		5D9356C51E6C499D00D0CD9B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5D9356C81E6C499D00D0CD9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5D9356CA1E6C499D00D0CD9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5D9356D51E6C4AD400D0CD9B /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		5D9356D81E6C4B0600D0CD9B /* RSSListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSSListViewController.swift; sourceTree = "<group>"; };
+		5D9356DA1E6C4B6D00D0CD9B /* RSSNewsFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSSNewsFeedViewController.swift; sourceTree = "<group>"; };
+		5D9356DC1E6C4B8000D0CD9B /* RSSNewsDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSSNewsDetailsViewController.swift; sourceTree = "<group>"; };
+		5D9356FE1E6C530100D0CD9B /* RSSSource+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RSSSource+CoreDataClass.swift"; sourceTree = "<group>"; };
+		5D9356FF1E6C530100D0CD9B /* RSSSource+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RSSSource+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5D9357001E6C530100D0CD9B /* RSSNews+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RSSNews+CoreDataClass.swift"; sourceTree = "<group>"; };
+		5D9357011E6C530100D0CD9B /* RSSNews+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RSSNews+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5D9357061E6C536F00D0CD9B /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		5D9357081E6C538800D0CD9B /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +75,11 @@
 			isa = PBXGroup;
 			children = (
 				5D9356BB1E6C499D00D0CD9B /* AppDelegate.swift */,
-				5D9356BD1E6C499D00D0CD9B /* ViewController.swift */,
+				5D9356D21E6C49D300D0CD9B /* Views */,
+				5D9356D11E6C49CB00D0CD9B /* Controllers */,
+				5D9356D01E6C49C400D0CD9B /* Model */,
+				5D9356D41E6C49F700D0CD9B /* Services */,
+				5D9356D31E6C49E600D0CD9B /* Frameworks */,
 				5D9356BF1E6C499D00D0CD9B /* Main.storyboard */,
 				5D9356C51E6C499D00D0CD9B /* Assets.xcassets */,
 				5D9356C71E6C499D00D0CD9B /* LaunchScreen.storyboard */,
@@ -65,6 +87,51 @@
 				5D9356C21E6C499D00D0CD9B /* RSS_Reader.xcdatamodeld */,
 			);
 			path = "RSS Reader";
+			sourceTree = "<group>";
+		};
+		5D9356D01E6C49C400D0CD9B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5D9356FE1E6C530100D0CD9B /* RSSSource+CoreDataClass.swift */,
+				5D9356FF1E6C530100D0CD9B /* RSSSource+CoreDataProperties.swift */,
+				5D9357001E6C530100D0CD9B /* RSSNews+CoreDataClass.swift */,
+				5D9357011E6C530100D0CD9B /* RSSNews+CoreDataProperties.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		5D9356D11E6C49CB00D0CD9B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5D9356D51E6C4AD400D0CD9B /* BaseViewController.swift */,
+				5D9356D81E6C4B0600D0CD9B /* RSSListViewController.swift */,
+				5D9356DA1E6C4B6D00D0CD9B /* RSSNewsFeedViewController.swift */,
+				5D9356DC1E6C4B8000D0CD9B /* RSSNewsDetailsViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		5D9356D21E6C49D300D0CD9B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		5D9356D31E6C49E600D0CD9B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5D9356D41E6C49F700D0CD9B /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				5D9357061E6C536F00D0CD9B /* NetworkService.swift */,
+				5D9357081E6C538800D0CD9B /* CoreDataStack.swift */,
+			);
+			name = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,9 +207,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5D9356BE1E6C499D00D0CD9B /* ViewController.swift in Sources */,
+				5D9357071E6C536F00D0CD9B /* NetworkService.swift in Sources */,
+				5D9357051E6C530100D0CD9B /* RSSNews+CoreDataProperties.swift in Sources */,
+				5D9356DB1E6C4B6D00D0CD9B /* RSSNewsFeedViewController.swift in Sources */,
+				5D9357091E6C538800D0CD9B /* CoreDataStack.swift in Sources */,
 				5D9356C41E6C499D00D0CD9B /* RSS_Reader.xcdatamodeld in Sources */,
+				5D9356D91E6C4B0600D0CD9B /* RSSListViewController.swift in Sources */,
+				5D9357041E6C530100D0CD9B /* RSSNews+CoreDataClass.swift in Sources */,
+				5D9356DD1E6C4B8000D0CD9B /* RSSNewsDetailsViewController.swift in Sources */,
 				5D9356BC1E6C499D00D0CD9B /* AppDelegate.swift in Sources */,
+				5D9357031E6C530100D0CD9B /* RSSSource+CoreDataProperties.swift in Sources */,
+				5D9357021E6C530100D0CD9B /* RSSSource+CoreDataClass.swift in Sources */,
+				5D9356D61E6C4AD400D0CD9B /* BaseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +341,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = XESDW7394F;
 				INFOPLIST_FILE = "RSS Reader/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kulakoff.RSS-Reader";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -278,6 +355,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = XESDW7394F;
 				INFOPLIST_FILE = "RSS Reader/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kulakoff.RSS-Reader";
 				PRODUCT_NAME = "$(TARGET_NAME)";

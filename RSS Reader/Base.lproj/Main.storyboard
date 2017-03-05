@@ -1,26 +1,128 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="PVd-Jm-VVW">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Navigation Controller-->
+        <scene sceneID="UAr-gI-JMi">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="PVd-Jm-VVW" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="G8k-Ai-ZrC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="hzP-X1-YQ6" kind="relationship" relationship="rootViewController" id="L19-BM-zgy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4zl-Q3-CMN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-740" y="139"/>
+        </scene>
+        <!--List View Controller-->
+        <scene sceneID="zHg-Gn-Ouh">
+            <objects>
+                <viewController id="hzP-X1-YQ6" customClass="RSSListViewController" customModule="RSS_Reader" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="R4i-2y-jco"/>
+                        <viewControllerLayoutGuide type="bottom" id="60h-ws-PQp"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="i7b-28-1HF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Lp8-NF-43D">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Lp8-NF-43D" firstAttribute="leading" secondItem="i7b-28-1HF" secondAttribute="leading" id="H7f-Lb-nhU"/>
+                            <constraint firstItem="60h-ws-PQp" firstAttribute="top" secondItem="Lp8-NF-43D" secondAttribute="bottom" id="b9P-on-OcR"/>
+                            <constraint firstItem="Lp8-NF-43D" firstAttribute="top" secondItem="i7b-28-1HF" secondAttribute="top" id="tjA-fB-nvH"/>
+                            <constraint firstAttribute="trailing" secondItem="Lp8-NF-43D" secondAttribute="trailing" id="uq7-8e-EFH"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="WMs-7g-C8S"/>
+                    <connections>
+                        <segue destination="FJu-py-3GA" kind="show" identifier="ToNewsFeedController" id="gch-8D-Swc"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eEV-PH-nma" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="12" y="139"/>
+        </scene>
+        <!--News Feed View Controller-->
+        <scene sceneID="Pc9-aU-W9S">
+            <objects>
+                <viewController id="FJu-py-3GA" customClass="RSSNewsFeedViewController" customModule="RSS_Reader" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rNQ-aH-Gs9"/>
+                        <viewControllerLayoutGuide type="bottom" id="eCf-vK-eZ6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5Dq-BQ-Ybd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="K4o-qE-YNa">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="eCf-vK-eZ6" firstAttribute="top" secondItem="K4o-qE-YNa" secondAttribute="bottom" id="3NZ-1M-p5y"/>
+                            <constraint firstAttribute="trailing" secondItem="K4o-qE-YNa" secondAttribute="trailing" id="QR5-Pf-pUc"/>
+                            <constraint firstItem="K4o-qE-YNa" firstAttribute="leading" secondItem="5Dq-BQ-Ybd" secondAttribute="leading" id="TwX-SN-cge"/>
+                            <constraint firstItem="K4o-qE-YNa" firstAttribute="top" secondItem="5Dq-BQ-Ybd" secondAttribute="top" id="kaC-pe-2Fq"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="83j-vL-C6g"/>
+                    <connections>
+                        <segue destination="man-ab-HPp" kind="show" identifier="ToNewsDetailsViewController" id="AMa-Rl-WJ7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="707-vw-ZcR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="762" y="139"/>
+        </scene>
+        <!--News Details View Controller-->
+        <scene sceneID="0gO-NO-gxd">
+            <objects>
+                <viewController id="man-ab-HPp" customClass="RSSNewsDetailsViewController" customModule="RSS_Reader" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MEq-jc-agJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="XUi-4W-0Xl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GS9-Io-6Ue">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8gJ-8m-1hp">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="8gJ-8m-1hp" firstAttribute="top" secondItem="GS9-Io-6Ue" secondAttribute="top" id="12W-fB-bwc"/>
+                            <constraint firstItem="8gJ-8m-1hp" firstAttribute="leading" secondItem="GS9-Io-6Ue" secondAttribute="leading" id="Jov-Cj-TNp"/>
+                            <constraint firstAttribute="trailing" secondItem="8gJ-8m-1hp" secondAttribute="trailing" id="LMw-BD-QIg"/>
+                            <constraint firstItem="XUi-4W-0Xl" firstAttribute="top" secondItem="8gJ-8m-1hp" secondAttribute="bottom" id="Olz-N4-ngm"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="1ki-yE-APQ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Cq-YQ-9m2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1524" y="139"/>
         </scene>
     </scenes>
 </document>
