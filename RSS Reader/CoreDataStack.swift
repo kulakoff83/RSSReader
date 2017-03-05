@@ -8,11 +8,87 @@
 
 import Foundation
 import CoreData
-
+import ObjectMapper
+import PromiseKit
+import AlamofireRSSParser
 
 final class CoreDataStack {
     
     static let shared = CoreDataStack()
+    
+    func createRSSSourcesWith(objects: [AnyObject]) -> Promise<[RSSSource]> {
+        return Promise { fulfill, reject in
+            var sources = [RSSSource]()
+            for object in objects {
+                if let rssSourceJSON  = object as? [String : Any] {
+                    guard let link = rssSourceJSON["rssURL"] as? String else {
+                        
+                        return
+                    }
+                    if !self.rssSourceIsExistWith(link: link) {
+                        if let source = Mapper<RSSSource>().map(JSON: rssSourceJSON) {
+                            sources.append(source)
+                        } else {
+                            let error = NSError(domain: "createSourcesWith", code: 123, userInfo: nil)//create specific error
+                            reject(error)
+                        }
+                    }
+                }
+            }
+//            if sources.count == 0 {
+//                let error = NSError(domain: "createSourcesWith", code: 123, userInfo: nil)//create specific error
+//                reject(error)
+//            }
+            self.saveContext()
+            fulfill(sources)
+        }
+    }
+    
+    func createRSSSourceWith(rssFeed: RSSFeed) -> Promise<RSSSource> {
+        return Promise { fulfill, reject in
+            if let link = rssFeed.link, let title = rssFeed.title {
+                let rssSource = RSSSource(title: title, link: link)
+                self.saveContext()
+                fulfill(rssSource)
+            } else {
+                let error = NSError(domain: "createRSSSourceWith", code: 123, userInfo: nil)//create specific error
+                reject(error)
+            }
+        }
+    }
+    
+    func rssSourceIsExistWith(link: String) -> Bool {
+        let fetchRequest: NSFetchRequest<RSSSource> = RSSSource.fetchRequest()
+        let predicate = NSPredicate(format: "rssURL == %@", link)
+        fetchRequest.predicate = predicate
+        do {
+            let results = try context.fetch(fetchRequest)
+            if results.count > 0 {
+                return true
+            }
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        return false
+    }
+    
+    lazy var context: NSManagedObjectContext = {
+        return self.persistentContainer.viewContext
+    }()
+    
+    lazy var rssSourceFetchedResultsController: NSFetchedResultsController<RSSSource> = {
+        // Create Fetch Request
+        let fetchRequest: NSFetchRequest<RSSSource> = RSSSource.fetchRequest()
+        
+        // Configure Fetch Request
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createDate", ascending: true)]
+        
+        // Create Fetched Results Controller
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        
+        return fetchedResultsController
+    }()
+    
     // MARK: - Core Data stack
     
     lazy var persistentContainer: NSPersistentContainer = {

@@ -10,6 +10,9 @@ import UIKit
 
 class RSSNewsFeedViewController: UIViewController {
 
+    @IBOutlet weak var tableView: UITableView!
+    fileprivate lazy var builder: TableViewCellBuilder = TableViewCellBuilder(tableView: self.tableView)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -52,6 +52,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="WMs-7g-C8S"/>
                     <connections>
+                        <outlet property="tableView" destination="Lp8-NF-43D" id="7yp-kY-zUy"/>
                         <segue destination="FJu-py-3GA" kind="show" identifier="ToNewsFeedController" id="gch-8D-Swc"/>
                     </connections>
                 </viewController>
@@ -86,6 +87,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="83j-vL-C6g"/>
                     <connections>
+                        <outlet property="tableView" destination="K4o-qE-YNa" id="dvv-4t-fQN"/>
                         <segue destination="man-ab-HPp" kind="show" identifier="ToNewsDetailsViewController" id="AMa-Rl-WJ7"/>
                     </connections>
                 </viewController>
@@ -119,6 +121,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="1ki-yE-APQ"/>
+                    <connections>
+                        <outlet property="tableView" destination="8gJ-8m-1hp" id="kxV-pY-rqd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Cq-YQ-9m2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

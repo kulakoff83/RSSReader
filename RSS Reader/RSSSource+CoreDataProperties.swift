@@ -16,9 +16,9 @@ extension RSSSource {
         return NSFetchRequest<RSSSource>(entityName: "RSSSource");
     }
 
-    @NSManaged public var id: Double
     @NSManaged public var title: String?
     @NSManaged public var rssURL: String?
+    @NSManaged public var createDate: Date?
     @NSManaged public var rssNews: NSSet?
 
 }
