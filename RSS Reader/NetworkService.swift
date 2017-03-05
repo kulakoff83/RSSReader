@@ -7,3 +7,11 @@
 //
 
 import Foundation
+import Alamofire
+
+final class NetworkService {
+    static let shared = NetworkService()
+    
+    
+    
+}
