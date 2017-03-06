@@ -18,7 +18,7 @@ extension RSSNews {
 
     @NSManaged public var title: String?
     @NSManaged public var newsDescription: String?
-    @NSManaged public var pubDate: NSDate?
+    @NSManaged public var pubDate: Date?
     @NSManaged public var link: String?
     @NSManaged public var rssSource: RSSSource?
 

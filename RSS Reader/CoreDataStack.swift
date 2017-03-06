@@ -57,10 +57,39 @@ final class CoreDataStack {
         }
     }
     
+    func updateRSSSource(rssSource: RSSSource, rssFeed: RSSFeed) -> Promise<[RSSNews]> {
+        return Promise { fulfill, reject in
+            var newsArray = [RSSNews]()
+            for item in rssFeed.items {
+                if let link = item.link {
+                    if !self.rssNewsIsExistWith(link: link) {
+                        let rssNews = RSSNews(rssItem: item)
+                        newsArray.append(rssNews)
+                    }
+                }
+            }
+            let news = NSSet().addingObjects(from: newsArray) as NSSet
+            rssSource.addToRssNews(news)
+            self.saveContext()
+            fulfill(Array(news) as! [RSSNews])
+        }
+    }
+    
     func rssSourceIsExistWith(link: String) -> Bool {
         let fetchRequest: NSFetchRequest<RSSSource> = RSSSource.fetchRequest()
         let predicate = NSPredicate(format: "rssURL == %@", link)
         fetchRequest.predicate = predicate
+        return self.objectIsExistWith(fetchRequest: fetchRequest as! NSFetchRequest<NSFetchRequestResult>)
+    }
+    
+    func rssNewsIsExistWith(link: String) -> Bool {
+        let fetchRequest: NSFetchRequest<RSSNews> = RSSNews.fetchRequest()
+        let predicate = NSPredicate(format: "link == %@", link)
+        fetchRequest.predicate = predicate
+        return self.objectIsExistWith(fetchRequest: fetchRequest as! NSFetchRequest<NSFetchRequestResult>)
+    }
+    
+    func objectIsExistWith(fetchRequest: NSFetchRequest<NSFetchRequestResult>) -> Bool {
         do {
             let results = try context.fetch(fetchRequest)
             if results.count > 0 {
@@ -82,6 +111,19 @@ final class CoreDataStack {
         
         // Configure Fetch Request
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createDate", ascending: true)]
+        
+        // Create Fetched Results Controller
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        
+        return fetchedResultsController
+    }()
+    
+    lazy var rssNewsFetchedResultsController: NSFetchedResultsController<RSSNews> = {
+        // Create Fetch Request
+        let fetchRequest: NSFetchRequest<RSSNews> = RSSNews.fetchRequest()
+        
+        // Configure Fetch Request
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "pubDate", ascending: true)]
         
         // Create Fetched Results Controller
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)

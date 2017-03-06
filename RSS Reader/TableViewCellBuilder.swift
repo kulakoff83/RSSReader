@@ -33,7 +33,13 @@ extension TableViewCellBuilder: TableViewCellBuilderInterface {
     
     func cellForRssList(_ rssSource: RSSSource, indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: RSSListTableViewCell.reuseIdentifier) as! RSSListTableViewCell
-        cell.configureCell(rssSource: rssSource)
+        cell.configureCellWith(rssSource: rssSource)
+        return cell
+    }
+    
+    func cellForRssNews(_ rssNews: RSSNews, indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: RSSNewsTableViewCell.reuseIdentifier) as! RSSNewsTableViewCell
+        cell.configureCellWith(rssNews: rssNews)
         return cell
     }
     

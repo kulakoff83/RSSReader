@@ -29,6 +29,14 @@ final class RequestService {
         }
     }
     
+    func requestRSSNewsFor(rssSource: RSSSource, url: URL) -> Promise<[RSSNews]> {
+        return firstly{
+            return NetworkService.shared.requestRSSFeedWithURLPromice(url)
+        }.then { feed in
+            return CoreDataStack.shared.updateRSSSource(rssSource: rssSource, rssFeed: feed)
+        }
+    }
+    
 }
 
 

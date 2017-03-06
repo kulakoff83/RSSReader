@@ -41,6 +41,7 @@ fileprivate protocol Configuration {
 
 fileprivate protocol Request {
     func requestRSSList()
+    func requestRSS(link: String)
 }
 
 fileprivate protocol Actions {
@@ -86,7 +87,7 @@ extension RSSListViewController: Configuration {
     }
     
     func configureNavigationBar() {
-        self.title = "RSS Source List"
+        self.title = "RSS"
         let addItem = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(addItemPressed))
         self.navigationItem.rightBarButtonItem = addItem
     }
@@ -144,7 +145,8 @@ extension RSSListViewController: UITableViewDataSource {
 extension RSSListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //
+        let record = fetchedResultsController!.object(at: indexPath)
+        self.performSegue(withIdentifier: Segues.newsFeed.identifier, sender: record)
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -186,7 +188,7 @@ extension RSSListViewController: NSFetchedResultsControllerDelegate {
             if let indexPath = indexPath {
                 let record = fetchedResultsController!.object(at: indexPath)
                 let cell = tableView.cellForRow(at: indexPath) as! RSSListTableViewCell
-                cell.configureCell(rssSource: record)
+                cell.configureCellWith(rssSource: record)
             }
             break;
         case .move:
@@ -217,7 +219,10 @@ extension RSSListViewController: Actions {
 extension RSSListViewController: Navigation {
     
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
+        if segue.identifier == Segues.newsFeed.identifier {
+            let newsFeedViewController = segue.destination as? RSSNewsFeedViewController
+            newsFeedViewController?.rssSource = sender as? RSSSource
+        }
      }
 
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 private protocol RSSListTableViewCellConfiguration: class {
-    func configureCell(rssSource: RSSSource)
+    func configureCellWith(rssSource: RSSSource)
 }
 
 class RSSListTableViewCell: BaseTableViewCell {
@@ -30,7 +30,7 @@ class RSSListTableViewCell: BaseTableViewCell {
 }
 
 extension RSSListTableViewCell: RSSListTableViewCellConfiguration {
-    func configureCell(rssSource: RSSSource) {
+    func configureCellWith(rssSource: RSSSource) {
         self.iconImageView?.image = UIImage(named: "rss_icon")
         self.titleLabel?.text = rssSource.title
     }
