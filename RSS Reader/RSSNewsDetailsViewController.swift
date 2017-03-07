@@ -30,10 +30,10 @@ class RSSNewsDetailsViewController: BaseViewController {
     
     deinit {
         self.webView?.delegate = nil
-        print("Deinit")
     }
-
 }
+
+// MARK: Setup
 
 extension RSSNewsDetailsViewController: Setup {
     
@@ -46,6 +46,8 @@ extension RSSNewsDetailsViewController: Setup {
         self.tableView.register(RSSNewsDetailsTableViewCell.nib, forCellReuseIdentifier: RSSNewsDetailsTableViewCell.reuseIdentifier)
     }
 }
+
+// MARK: UITableViewDataSource
 
 extension RSSNewsDetailsViewController: UITableViewDataSource {
     

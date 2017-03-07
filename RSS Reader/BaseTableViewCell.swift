@@ -25,9 +25,4 @@ extension Reusable {
 
 class BaseTableViewCell: UITableViewCell,Reusable {
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
 }

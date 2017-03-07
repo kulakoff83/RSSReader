@@ -30,6 +30,8 @@ class RSSNewsTableViewCell: BaseTableViewCell {
     
 }
 
+//MARK: Configuration
+
 extension RSSNewsTableViewCell: RSSNewsTableViewCellConfiguration {
     func configureCellWith(rssNews: RSSNews) {
         self.titleLabel?.text = rssNews.title

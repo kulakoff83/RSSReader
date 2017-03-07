@@ -8,6 +8,8 @@
 
 import UIKit
 
+//MARK: UIViewController,BaseLoadViewProtocol
+
 protocol BaseLoadViewProtocol { }
 
 extension BaseLoadViewProtocol where Self: UIViewController {
@@ -37,6 +39,8 @@ extension BaseLoadViewProtocol where Self: UIViewController {
     }
 }
 
+//MARK: Date
+
 extension Date {
     
     func dateString() -> String {
@@ -48,6 +52,8 @@ extension Date {
     
 }
 
+//MARK: String
+
 extension String {
     func addResponsiveImageStyleToHtmlString() -> String {
         return
@@ -58,5 +64,17 @@ extension String {
                 "   </style>" +
                 "</head>" +
         self
+    }
+}
+
+extension UIRefreshControl {
+    func beginRefreshingWithTableView(tableView: UITableView) {
+        self.beginRefreshing()
+        if tableView.contentOffset.y == 0 {
+            UIView.animate(withDuration: 0.25, delay: 0, options: .beginFromCurrentState, animations: {
+                tableView.contentOffset = CGPoint(x:0,y: -self.frame.size.height)
+            })
+        }
+
     }
 }

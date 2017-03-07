@@ -29,9 +29,11 @@ class RSSListTableViewCell: BaseTableViewCell {
     }    
 }
 
+//MARK: Configuration
+
 extension RSSListTableViewCell: RSSListTableViewCellConfiguration {
     func configureCellWith(rssSource: RSSSource) {
-        self.iconImageView?.image = UIImage(named: "rss_icon")
+        self.iconImageView?.image = UIImage(named: Constants.RSSIcon)
         self.titleLabel?.text = rssSource.title
     }
 }

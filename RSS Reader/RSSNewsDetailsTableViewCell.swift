@@ -37,6 +37,8 @@ class RSSNewsDetailsTableViewCell: BaseTableViewCell {
     }
 }
 
+//MARK: Configuration
+
 extension RSSNewsDetailsTableViewCell: RSSNewsTableViewCellConfiguration {
     
     func configureCellWith(rssNews: RSSNews) {

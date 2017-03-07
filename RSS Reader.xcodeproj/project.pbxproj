@@ -270,8 +270,7 @@
 				TargetAttributes = {
 					5D9356B71E6C499D00D0CD9B = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = XESDW7394F;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -507,11 +506,12 @@
 			baseConfigurationReference = 7D7ED633CD3415CF28A98110 /* Pods-RSS Reader.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = XESDW7394F;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "RSS Reader/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.kulakoff.RSS-Reader";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kulakoff.rss-reader";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -522,11 +522,12 @@
 			baseConfigurationReference = 7BE1C90DF9E13FF6E4584CAF /* Pods-RSS Reader.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = XESDW7394F;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "RSS Reader/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.kulakoff.RSS-Reader";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kulakoff.rss-reader";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

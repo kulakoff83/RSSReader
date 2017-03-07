@@ -36,7 +36,6 @@ class RSSListViewController: BaseViewController {
             newsFeedViewController?.rssSource = sender as? RSSSource
         }
     }
-
 }
 
 fileprivate protocol Request {
@@ -47,6 +46,8 @@ fileprivate protocol Request {
 fileprivate protocol Actions {
     func addItemPressed()
 }
+
+//MARK: Setup
 
 extension RSSListViewController: Setup {
     
@@ -94,10 +95,12 @@ extension RSSListViewController: Configuration {
     }
 }
 
+//MARK: Request
+
 extension RSSListViewController: Request,BaseLoadViewProtocol  {
     
     func requestRSSList() {
-        guard let sourceURL = URL(string: Constants.sourceURL) else { return }
+        guard let sourceURL = URL(string: Constants.SourceURL) else { return }
         firstly {
             RequestService.shared.requestRSSSourcesWith(url: sourceURL)
         }.then { sources -> Void in
@@ -127,6 +130,8 @@ extension RSSListViewController: Request,BaseLoadViewProtocol  {
     }
 }
 
+//MARK: UITableViewDataSource
+
 extension RSSListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -142,6 +147,8 @@ extension RSSListViewController: UITableViewDataSource {
         return self.builder.cellForRssList(record, indexPath: indexPath)
     }
 }
+
+//MARK: UITableViewDelegate
 
 extension RSSListViewController: UITableViewDelegate {
     
@@ -161,6 +168,8 @@ extension RSSListViewController: UITableViewDelegate {
         }
     }
 }
+
+//MARK: NSFetchedResultsControllerDelegate
 
 extension RSSListViewController: NSFetchedResultsControllerDelegate {
     
@@ -204,6 +213,8 @@ extension RSSListViewController: NSFetchedResultsControllerDelegate {
         }
     }
 }
+
+//MARK: Actions
 
 extension RSSListViewController: Actions {
     

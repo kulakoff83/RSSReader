@@ -10,6 +10,7 @@ import Foundation
 
 public struct Constants {
     
-    static let sourceURL = "http://essa-apps.com/rss_feed.json"
+    static let SourceURL = "http://essa-apps.com/rss_feed.json"
+    static let RSSIcon = "rss_icon"
     
 }

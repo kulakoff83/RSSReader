@@ -44,11 +44,11 @@ fileprivate protocol Request {
     func requestRSSNews()
 }
 
+// MARK: - Setup
 
 extension RSSNewsFeedViewController: Setup {
     
     func initialSetup() {
-        self.showLoadingView()
         self.requestRSSNews()
         self.setupTableView()
         self.configureFetchResultController()
@@ -87,8 +87,11 @@ extension RSSNewsFeedViewController: Configuration {
         self.refreshControl.addTarget(self, action: #selector(requestRSSNews), for: UIControlEvents.valueChanged)
         self.tableView.refreshControl = self.refreshControl
         self.refreshControl.layoutIfNeeded()
+        self.refreshControl.beginRefreshingWithTableView(tableView: self.tableView)
     }
 }
+
+// MARK: - Requests
 
 extension RSSNewsFeedViewController: Request,BaseLoadViewProtocol  {
     
@@ -100,15 +103,15 @@ extension RSSNewsFeedViewController: Request,BaseLoadViewProtocol  {
         }.then { news -> Void in
             print(news)
         }.always { [weak self] _ in
-            self?.hideLoadingView()
             self?.refreshControl.endRefreshing()
         }.catch { [weak self] error in
             self?.showErrorAlert(title: error.localizedDescription)
             print(error)
         }
-    }
-    
+    }    
 }
+
+// MARK: - NSFetchedResultsControllerDelegate
 
 extension RSSNewsFeedViewController: NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -152,6 +155,8 @@ extension RSSNewsFeedViewController: NSFetchedResultsControllerDelegate {
     }
 }
 
+// MARK: - UITableViewDataSource
+
 extension RSSNewsFeedViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -167,6 +172,8 @@ extension RSSNewsFeedViewController: UITableViewDataSource {
         return self.builder.cellForRssNews(record, indexPath: indexPath)
     }
 }
+
+// MARK: - UITableViewDelegate
 
 extension RSSNewsFeedViewController: UITableViewDelegate {
     

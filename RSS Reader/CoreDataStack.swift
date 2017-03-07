@@ -35,10 +35,6 @@ final class CoreDataStack {
                     }
                 }
             }
-//            if sources.count == 0 {
-//                let error = NSError(domain: "createSourcesWith", code: 123, userInfo: nil)//create specific error
-//                reject(error)
-//            }
             self.saveContext()
             fulfill(sources)
         }
