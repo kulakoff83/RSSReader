@@ -123,7 +123,7 @@ final class CoreDataStack {
         let fetchRequest: NSFetchRequest<RSSNews> = RSSNews.fetchRequest()
         
         // Configure Fetch Request
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "pubDate", ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "pubDate", ascending: false)]
         
         // Create Fetched Results Controller
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)

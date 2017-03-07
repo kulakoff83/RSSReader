@@ -8,6 +8,17 @@
 
 import UIKit
 
+protocol Setup {
+    func initialSetup()
+    func setupTableView()
+}
+
+protocol Configuration {
+    func configureNavigationBar()
+    func configureFetchResultController()
+    func configurePullToRefresh()
+}
+
 class BaseViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -24,6 +35,12 @@ class BaseViewController: UIViewController {
     func showErrorAlert(title: String) {
         let alert = Alert.errorAlert(title: title)
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func defaultConfigurationFor(tableView: UITableView) {
+        tableView.estimatedRowHeight = 44
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
     }
 
 }

@@ -8,14 +8,18 @@
 
 import UIKit
 
-class RSSNewsDetailsViewController: UIViewController {
+class RSSNewsDetailsViewController: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
     fileprivate lazy var builder: TableViewCellBuilder = TableViewCellBuilder(tableView: self.tableView)
+    var rssNews: RSSNews?
+    fileprivate var contentHeight : CGFloat = 0.0
+    fileprivate let cellCount = 1
+    fileprivate var webView: UIWebView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.initialSetup()
         // Do any additional setup after loading the view.
     }
 
@@ -24,15 +28,57 @@ class RSSNewsDetailsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    deinit {
+        self.webView?.delegate = nil
+        print("Deinit")
     }
-    */
 
+}
+
+extension RSSNewsDetailsViewController: Setup {
+    
+    func initialSetup() {
+        self.setupTableView()
+    }
+    
+    func setupTableView() {
+        self.defaultConfigurationFor(tableView: self.tableView)
+        self.tableView.register(RSSNewsDetailsTableViewCell.nib, forCellReuseIdentifier: RSSNewsDetailsTableViewCell.reuseIdentifier)
+    }
+}
+
+extension RSSNewsDetailsViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return cellCount
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return self.builder.cellForDetailsRssNews(rssNews!, delegate: self,
+                                                  contentHeight: contentHeight, indexPath: indexPath)
+    }
+}
+
+// MARK: WebViewDelegate
+
+extension RSSNewsDetailsViewController: UIWebViewDelegate {
+    
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        if self.webView == nil {
+            self.webView = webView
+        }
+        if (contentHeight != 0.0) {
+            return
+        }
+        var frame = webView.frame;
+        frame.size.height = 1;
+        webView.frame = frame;
+        let fittingSize = webView.sizeThatFits(CGSize(width:0, height:0))
+        frame.size = fittingSize;
+        webView.frame = frame;
+        contentHeight = frame.height
+        contentHeight = webView.scrollView.contentSize.height
+        webView.layoutIfNeeded()
+        tableView.reloadData()
+    }
 }

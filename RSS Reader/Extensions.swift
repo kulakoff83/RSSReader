@@ -36,3 +36,27 @@ extension BaseLoadViewProtocol where Self: UIViewController {
         loadView?.stopIndicator()
     }
 }
+
+extension Date {
+    
+    func dateString() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd-MM-yyyy HH:mm"
+        let defaultTimeZoneStr = formatter.string(from: self)
+        return defaultTimeZoneStr
+    }
+    
+}
+
+extension String {
+    func addResponsiveImageStyleToHtmlString() -> String {
+        return
+            "<head>" +
+                "   <style>" +
+                "        img{max-width: 100%; max-height: auto;}" +
+                "        iframe{max-width: 100%; max-height: auto;}" +
+                "   </style>" +
+                "</head>" +
+        self
+    }
+}

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RSSNewsDetailsTableViewCellIdentifier" rowHeight="66" id="KGk-i7-Jjw" customClass="RSSNewsDetailsTableViewCell" customModule="RSS_Reader" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="66"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="65.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uwm-mu-nN3">
+                        <rect key="frame" x="8" y="3" width="304" height="19"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="18" id="NnY-M8-H5G"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d6P-Vd-n0e">
+                        <rect key="frame" x="8" y="24" width="304" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" priority="750" constant="15" id="oxc-ip-Nub"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bZE-1m-jJn">
+                        <rect key="frame" x="8" y="40.5" width="304" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="pcA-4V-oCX"/>
+                        </constraints>
+                        <state key="normal" title="Looking in sourse"/>
+                        <connections>
+                            <action selector="sourceButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="5aF-5H-obN"/>
+                        </connections>
+                    </button>
+                    <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="egB-88-R1q">
+                        <rect key="frame" x="0.0" y="38.5" width="320" height="0.0"/>
+                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" id="uwb-zM-SQy"/>
+                        </constraints>
+                    </webView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="d6P-Vd-n0e" secondAttribute="trailing" constant="8" id="4Cv-ce-519"/>
+                    <constraint firstItem="d6P-Vd-n0e" firstAttribute="top" secondItem="uwm-mu-nN3" secondAttribute="bottom" constant="2" id="65U-iS-5CG"/>
+                    <constraint firstItem="bZE-1m-jJn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="A1l-MT-vqL"/>
+                    <constraint firstAttribute="bottom" secondItem="bZE-1m-jJn" secondAttribute="bottom" constant="10" id="F3j-3G-qOl"/>
+                    <constraint firstAttribute="trailing" secondItem="egB-88-R1q" secondAttribute="trailing" id="IBu-68-W2a"/>
+                    <constraint firstAttribute="trailing" secondItem="uwm-mu-nN3" secondAttribute="trailing" constant="8" id="JFW-Db-qSu"/>
+                    <constraint firstItem="egB-88-R1q" firstAttribute="top" secondItem="d6P-Vd-n0e" secondAttribute="bottom" constant="-0.5" id="XTx-rw-ywz"/>
+                    <constraint firstItem="uwm-mu-nN3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="ZhP-lp-ckT"/>
+                    <constraint firstItem="bZE-1m-jJn" firstAttribute="top" secondItem="egB-88-R1q" secondAttribute="bottom" constant="2" id="gWV-Oz-fA4"/>
+                    <constraint firstItem="d6P-Vd-n0e" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="nDr-Od-rsm"/>
+                    <constraint firstItem="egB-88-R1q" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="nvi-i2-9SC"/>
+                    <constraint firstItem="uwm-mu-nN3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3" id="scO-7n-wNc"/>
+                    <constraint firstAttribute="trailing" secondItem="bZE-1m-jJn" secondAttribute="trailing" constant="8" id="zO2-Zh-9Iu"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="dateLabel" destination="d6P-Vd-n0e" id="Is1-vp-mWw"/>
+                <outlet property="newsDescriptionWebView" destination="egB-88-R1q" id="ZDy-D0-zYx"/>
+                <outlet property="titleLabel" destination="uwm-mu-nN3" id="4rJ-0E-ffX"/>
+                <outlet property="webViewHeight" destination="uwb-zM-SQy" id="Q4F-u8-cU9"/>
+            </connections>
+            <point key="canvasLocation" x="34" y="65"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -10,6 +10,8 @@ import UIKit
 
 private protocol TableViewCellBuilderInterface: class {
     func cellForRssList(_ rssSource: RSSSource, indexPath: IndexPath) -> UITableViewCell
+    func cellForRssNews(_ rssNews: RSSNews, indexPath: IndexPath) -> UITableViewCell
+    func cellForDetailsRssNews(_ rssNews: RSSNews,delegate: RSSNewsDetailsViewController,contentHeight: CGFloat, indexPath: IndexPath) -> UITableViewCell
 }
 
 final class TableViewCellBuilder {
@@ -43,4 +45,16 @@ extension TableViewCellBuilder: TableViewCellBuilderInterface {
         return cell
     }
     
+    func cellForDetailsRssNews(_ rssNews: RSSNews,delegate: RSSNewsDetailsViewController,contentHeight: CGFloat, indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: RSSNewsDetailsTableViewCell.reuseIdentifier) as! RSSNewsDetailsTableViewCell
+        cell.newsDescriptionWebView.delegate = delegate
+        cell.newsDescriptionWebView.tag = indexPath.row
+        cell.contentHeight = contentHeight
+        cell.handler = { [weak self] in
+            cell.newsDescriptionWebView.layoutIfNeeded()
+            self?.tableView.reloadData()
+        }
+        cell.configureCellWith(rssNews: rssNews)
+        return cell
+    }
 }

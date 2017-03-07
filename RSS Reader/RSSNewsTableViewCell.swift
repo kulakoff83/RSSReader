@@ -8,7 +8,7 @@
 
 import UIKit
 
-private protocol RSSNewsTableViewCellConfiguration: class {
+protocol RSSNewsTableViewCellConfiguration: class {
     func configureCellWith(rssNews: RSSNews)
 }
 
@@ -33,6 +33,6 @@ class RSSNewsTableViewCell: BaseTableViewCell {
 extension RSSNewsTableViewCell: RSSNewsTableViewCellConfiguration {
     func configureCellWith(rssNews: RSSNews) {
         self.titleLabel?.text = rssNews.title
-        self.dateLabel?.text = "\(rssNews.pubDate)"
+        self.dateLabel?.text = rssNews.pubDate?.dateString()
     }
 }

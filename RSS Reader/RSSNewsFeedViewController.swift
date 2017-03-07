@@ -16,6 +16,7 @@ class RSSNewsFeedViewController: BaseViewController {
     fileprivate lazy var builder: TableViewCellBuilder = TableViewCellBuilder(tableView: self.tableView)
     var rssSource: RSSSource?
     fileprivate var fetchedResultsController: NSFetchedResultsController<RSSNews>?
+    fileprivate var refreshControl: UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,16 +29,15 @@ class RSSNewsFeedViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
-}
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Segues.newsDetails.identifier {
+            let newsDetailsViewController = segue.destination as? RSSNewsDetailsViewController
+            newsDetailsViewController?.rssNews = sender as? RSSNews
+        }
+    }
 
-fileprivate protocol Setup {
-    func initialSetup()
-}
-
-fileprivate protocol Configuration {
-    func configureTableView()
-    func configureNavigationBar()
-    func configureFetchResultController()
 }
 
 fileprivate protocol Request {
@@ -48,25 +48,23 @@ fileprivate protocol Request {
 extension RSSNewsFeedViewController: Setup {
     
     func initialSetup() {
+        self.showLoadingView()
         self.requestRSSNews()
-        self.configureTableView()
+        self.setupTableView()
         self.configureFetchResultController()
         self.configureNavigationBar()
+        self.configurePullToRefresh()
+    }
+    
+    func setupTableView() {
+        self.defaultConfigurationFor(tableView: self.tableView)
+        self.tableView.register(RSSNewsTableViewCell.nib, forCellReuseIdentifier: RSSNewsTableViewCell.reuseIdentifier)
     }
 }
 
 //MARK: Configuration
 
 extension RSSNewsFeedViewController: Configuration {
-    
-    func configureTableView() {
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        self.tableView.estimatedRowHeight = 44
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
-        self.tableView.register(RSSNewsTableViewCell.nib, forCellReuseIdentifier: RSSNewsTableViewCell.reuseIdentifier)
-    }
     
     func configureFetchResultController() {
         fetchedResultsController = CoreDataStack.shared.rssNewsFetchedResultsController
@@ -83,6 +81,13 @@ extension RSSNewsFeedViewController: Configuration {
     func configureNavigationBar() {
         self.title = self.rssSource?.title
     }
+    
+    func configurePullToRefresh() {
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.addTarget(self, action: #selector(requestRSSNews), for: UIControlEvents.valueChanged)
+        self.tableView.refreshControl = self.refreshControl
+        self.refreshControl.layoutIfNeeded()
+    }
 }
 
 extension RSSNewsFeedViewController: Request,BaseLoadViewProtocol  {
@@ -90,13 +95,13 @@ extension RSSNewsFeedViewController: Request,BaseLoadViewProtocol  {
     func requestRSSNews() {
         guard let rssURLString = rssSource?.rssURL else { return }
         guard let rssURL = URL(string: rssURLString) else { return }
-        self.showLoadingView()
         firstly {
             RequestService.shared.requestRSSNewsFor(rssSource: rssSource!, url: rssURL)
         }.then { news -> Void in
             print(news)
         }.always { [weak self] _ in
             self?.hideLoadingView()
+            self?.refreshControl.endRefreshing()
         }.catch { [weak self] error in
             self?.showErrorAlert(title: error.localizedDescription)
             print(error)
@@ -161,9 +166,12 @@ extension RSSNewsFeedViewController: UITableViewDataSource {
         let record = fetchedResultsController!.object(at: indexPath)
         return self.builder.cellForRssNews(record, indexPath: indexPath)
     }
-    
 }
 
 extension RSSNewsFeedViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let record = fetchedResultsController!.object(at: indexPath)
+        self.performSegue(withIdentifier: Segues.newsDetails.identifier, sender: record)
+    }
 }

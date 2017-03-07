@@ -15,6 +15,7 @@ class RSSListViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
     fileprivate lazy var builder: TableViewCellBuilder = TableViewCellBuilder(tableView: self.tableView)
     fileprivate var fetchedResultsController: NSFetchedResultsController<RSSSource>?
+    fileprivate var refreshControl: UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,17 +27,16 @@ class RSSListViewController: BaseViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Segues.newsFeed.identifier {
+            let newsFeedViewController = segue.destination as? RSSNewsFeedViewController
+            newsFeedViewController?.rssSource = sender as? RSSSource
+        }
+    }
 
-}
-
-fileprivate protocol Setup {
-    func initialSetup()
-}
-
-fileprivate protocol Configuration {
-    func configureTableView()
-    func configureNavigationBar()
-    func configureFetchResultController()
 }
 
 fileprivate protocol Request {
@@ -48,32 +48,26 @@ fileprivate protocol Actions {
     func addItemPressed()
 }
 
-fileprivate protocol Navigation {
-    
-}
-
 extension RSSListViewController: Setup {
     
     func initialSetup() {
+        self.showLoadingView()
         self.requestRSSList()
-        self.configureTableView()
+        self.setupTableView()
         self.configureFetchResultController()
         self.configureNavigationBar()
+        self.configurePullToRefresh()
+    }
+    
+    func setupTableView() {
+        self.defaultConfigurationFor(tableView: self.tableView)
+        self.tableView.register(RSSListTableViewCell.nib, forCellReuseIdentifier: RSSListTableViewCell.reuseIdentifier)
     }
 }
 
 //MARK: Configuration
 
 extension RSSListViewController: Configuration {
-    
-    func configureTableView() {
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        self.tableView.estimatedRowHeight = 44
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
-        self.tableView.register(RSSListTableViewCell.nib, forCellReuseIdentifier: RSSListTableViewCell.reuseIdentifier)
-    }
     
     func configureFetchResultController() {
         fetchedResultsController = CoreDataStack.shared.rssSourceFetchedResultsController
@@ -91,21 +85,28 @@ extension RSSListViewController: Configuration {
         let addItem = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(addItemPressed))
         self.navigationItem.rightBarButtonItem = addItem
     }
+    
+    func configurePullToRefresh() {
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.addTarget(self, action: #selector(requestRSSList), for: UIControlEvents.valueChanged)
+        self.tableView.refreshControl = self.refreshControl
+        self.refreshControl.layoutIfNeeded()
+    }
 }
 
 extension RSSListViewController: Request,BaseLoadViewProtocol  {
     
     func requestRSSList() {
         guard let sourceURL = URL(string: Constants.sourceURL) else { return }
-        self.showLoadingView()
         firstly {
             RequestService.shared.requestRSSSourcesWith(url: sourceURL)
         }.then { sources -> Void in
             print(sources)
         }.always { [weak self] _ in
             self?.hideLoadingView()
-        }.catch { error in
-            self.showErrorAlert(title: error.localizedDescription)
+            self?.refreshControl.endRefreshing()
+        }.catch { [weak self] error in
+            self?.showErrorAlert(title: error.localizedDescription)
            print(error)
         }
     }
@@ -119,8 +120,8 @@ extension RSSListViewController: Request,BaseLoadViewProtocol  {
             print(source)
         }.always { [weak self] _ in
             self?.hideLoadingView()
-        }.catch { error in
-            self.showErrorAlert(title: error.localizedDescription)
+        }.catch { [weak self] error in
+            self?.showErrorAlert(title: error.localizedDescription)
             print(error)
         }
     }
@@ -214,15 +215,3 @@ extension RSSListViewController: Actions {
     }
 }
 
-// MARK: - Navigation
-
-extension RSSListViewController: Navigation {
-    
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Segues.newsFeed.identifier {
-            let newsFeedViewController = segue.destination as? RSSNewsFeedViewController
-            newsFeedViewController?.rssSource = sender as? RSSSource
-        }
-     }
-
-}
